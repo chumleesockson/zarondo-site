@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Zarondo avatar">
+  <title>Zarondo avatar</title>
+  <rect width="512" height="512" rx="116" fill="#141B3A"/>
+  <g fill="none" stroke-width="11" transform="translate(71,71) scale(3.0833)">
+    <circle cx="71.91" cy="15.57" r="5.5" fill="#FFC400"/>
+    <circle cx="15.57" cy="71.91" r="5.5" fill="#2684FF"/>
+    <path stroke="#FFC102" d="M71.91 15.57 A46 46 0 0 0 69.49 14.99"/>
+    <path stroke="#FFBC07" d="M69.96 15.09 A46 46 0 0 0 67.51 14.62"/>
+    <path stroke="#FFB60B" d="M67.99 14.7 A46 46 0 0 0 65.53 14.33"/>
+    <path stroke="#FFB010" d="M66 14.39 A46 46 0 0 0 63.53 14.14"/>
+    <path stroke="#FFAB15" d="M64.01 14.18 A46 46 0 0 0 61.53 14.03"/>
+    <path stroke="#FFA519" d="M62.01 14.04 A46 46 0 0 0 59.52 14"/>
+    <path stroke="#FF9F1E" d="M60 14 A46 46 0 0 0 57.51 14.07"/>
+    <path stroke="#FF9A22" d="M57.99 14.04 A46 46 0 0 0 55.51 14.22"/>
+    <path stroke="#FF9427" d="M55.99 14.18 A46 46 0 0 0 53.52 14.46"/>
+    <path stroke="#FF8F2C" d="M54 14.39 A46 46 0 0 0 51.54 14.78"/>
+    <path stroke="#FF8930" d="M52.01 14.7 A46 46 0 0 0 49.57 15.2"/>
+    <path stroke="#FF8335" d="M50.04 15.09 A46 46 0 0 0 47.63 15.69"/>
+    <path stroke="#FF7E39" d="M48.09 15.57 A46 46 0 0 0 45.71 16.28"/>
+    <path stroke="#FF783E" d="M46.17 16.13 A46 46 0 0 0 43.82 16.94"/>
+    <path stroke="#FF7242" d="M44.27 16.77 A46 46 0 0 0 41.95 17.69"/>
+    <path stroke="#FF6D47" d="M42.4 17.5 A46 46 0 0 0 40.12 18.52"/>
+    <path stroke="#FF674C" d="M40.56 18.31 A46 46 0 0 0 38.33 19.42"/>
+    <path stroke="#FF6250" d="M38.76 19.2 A46 46 0 0 0 36.58 20.41"/>
+    <path stroke="#FF5C55" d="M37 20.16 A46 46 0 0 0 34.88 21.46"/>
+    <path stroke="#FF5659" d="M35.28 21.2 A46 46 0 0 0 33.22 22.6"/>
+    <path stroke="#FF515E" d="M33.62 22.32 A46 46 0 0 0 31.62 23.8"/>
+    <path stroke="#FF4B63" d="M32 23.51 A46 46 0 0 0 30.06 25.07"/>
+    <path stroke="#FF4567" d="M30.43 24.76 A46 46 0 0 0 28.57 26.41"/>
+    <path stroke="#FF406C" d="M28.92 26.09 A46 46 0 0 0 27.13 27.82"/>
+    <path stroke="#FA3E71" d="M27.47 27.47 A46 46 0 0 0 25.76 29.28"/>
+    <path stroke="#F14177" d="M26.09 28.92 A46 46 0 0 0 24.45 30.8"/>
+    <path stroke="#E8447D" d="M24.76 30.43 A46 46 0 0 0 23.21 32.38"/>
+    <path stroke="#DF4783" d="M23.51 32 A46 46 0 0 0 22.04 34.01"/>
+    <path stroke="#D64A89" d="M22.32 33.62 A46 46 0 0 0 20.95 35.69"/>
+    <path stroke="#CD4D8F" d="M21.2 35.28 A46 46 0 0 0 19.92 37.42"/>
+    <path stroke="#C45095" d="M20.16 37 A46 46 0 0 0 18.98 39.19"/>
+    <path stroke="#BB539B" d="M19.2 38.76 A46 46 0 0 0 18.11 41"/>
+    <path stroke="#B256A1" d="M18.31 40.56 A46 46 0 0 0 17.32 42.84"/>
+    <path stroke="#A959A7" d="M17.5 42.4 A46 46 0 0 0 16.61 44.72"/>
+    <path stroke="#A05CAD" d="M16.77 44.27 A46 46 0 0 0 15.99 46.63"/>
+    <path stroke="#975FB3" d="M16.13 46.17 A46 46 0 0 0 15.45 48.56"/>
+    <path stroke="#8E62BA" d="M15.57 48.09 A46 46 0 0 0 14.99 50.51"/>
+    <path stroke="#8565C0" d="M15.09 50.04 A46 46 0 0 0 14.62 52.49"/>
+    <path stroke="#7C68C6" d="M14.7 52.01 A46 46 0 0 0 14.33 54.47"/>
+    <path stroke="#736BCC" d="M14.39 54 A46 46 0 0 0 14.14 56.47"/>
+    <path stroke="#6A6ED2" d="M14.18 55.99 A46 46 0 0 0 14.03 58.47"/>
+    <path stroke="#6171D8" d="M14.04 57.99 A46 46 0 0 0 14 60.48"/>
+    <path stroke="#5874DE" d="M14 60 A46 46 0 0 0 14.07 62.49"/>
+    <path stroke="#4F77E4" d="M14.04 62.01 A46 46 0 0 0 14.22 64.49"/>
+    <path stroke="#467AEA" d="M14.18 64.01 A46 46 0 0 0 14.46 66.48"/>
+    <path stroke="#3D7DF0" d="M14.39 66 A46 46 0 0 0 14.78 68.46"/>
+    <path stroke="#3480F6" d="M14.7 67.99 A46 46 0 0 0 15.2 70.43"/>
+    <path stroke="#2B83FC" d="M15.09 69.96 A46 46 0 0 0 15.57 71.91"/>
+    <circle cx="48.09" cy="104.43" r="5.5" fill="#FFC400"/>
+    <circle cx="104.43" cy="48.09" r="5.5" fill="#2684FF"/>
+    <path stroke="#FFC102" d="M48.09 104.43 A46 46 0 0 0 50.51 105.01"/>
+    <path stroke="#FFBC07" d="M50.04 104.91 A46 46 0 0 0 52.49 105.38"/>
+    <path stroke="#FFB60B" d="M52.01 105.3 A46 46 0 0 0 54.47 105.67"/>
+    <path stroke="#FFB010" d="M54 105.61 A46 46 0 0 0 56.47 105.86"/>
+    <path stroke="#FFAB15" d="M55.99 105.82 A46 46 0 0 0 58.47 105.97"/>
+    <path stroke="#FFA519" d="M57.99 105.96 A46 46 0 0 0 60.48 106"/>
+    <path stroke="#FF9F1E" d="M60 106 A46 46 0 0 0 62.49 105.93"/>
+    <path stroke="#FF9A22" d="M62.01 105.96 A46 46 0 0 0 64.49 105.78"/>
+    <path stroke="#FF9427" d="M64.01 105.82 A46 46 0 0 0 66.48 105.54"/>
+    <path stroke="#FF8F2C" d="M66 105.61 A46 46 0 0 0 68.46 105.22"/>
+    <path stroke="#FF8930" d="M67.99 105.3 A46 46 0 0 0 70.43 104.8"/>
+    <path stroke="#FF8335" d="M69.96 104.91 A46 46 0 0 0 72.37 104.31"/>
+    <path stroke="#FF7E39" d="M71.91 104.43 A46 46 0 0 0 74.29 103.72"/>
+    <path stroke="#FF783E" d="M73.83 103.87 A46 46 0 0 0 76.18 103.06"/>
+    <path stroke="#FF7242" d="M75.73 103.23 A46 46 0 0 0 78.05 102.31"/>
+    <path stroke="#FF6D47" d="M77.6 102.5 A46 46 0 0 0 79.88 101.48"/>
+    <path stroke="#FF674C" d="M79.44 101.69 A46 46 0 0 0 81.67 100.58"/>
+    <path stroke="#FF6250" d="M81.24 100.8 A46 46 0 0 0 83.42 99.59"/>
+    <path stroke="#FF5C55" d="M83 99.84 A46 46 0 0 0 85.12 98.54"/>
+    <path stroke="#FF5659" d="M84.72 98.8 A46 46 0 0 0 86.78 97.4"/>
+    <path stroke="#FF515E" d="M86.38 97.68 A46 46 0 0 0 88.38 96.2"/>
+    <path stroke="#FF4B63" d="M88 96.49 A46 46 0 0 0 89.94 94.93"/>
+    <path stroke="#FF4567" d="M89.57 95.24 A46 46 0 0 0 91.43 93.59"/>
+    <path stroke="#FF406C" d="M91.08 93.91 A46 46 0 0 0 92.87 92.18"/>
+    <path stroke="#FA3E71" d="M92.53 92.53 A46 46 0 0 0 94.24 90.72"/>
+    <path stroke="#F14177" d="M93.91 91.08 A46 46 0 0 0 95.55 89.2"/>
+    <path stroke="#E8447D" d="M95.24 89.57 A46 46 0 0 0 96.79 87.62"/>
+    <path stroke="#DF4783" d="M96.49 88 A46 46 0 0 0 97.96 85.99"/>
+    <path stroke="#D64A89" d="M97.68 86.38 A46 46 0 0 0 99.05 84.31"/>
+    <path stroke="#CD4D8F" d="M98.8 84.72 A46 46 0 0 0 100.08 82.58"/>
+    <path stroke="#C45095" d="M99.84 83 A46 46 0 0 0 101.02 80.81"/>
+    <path stroke="#BB539B" d="M100.8 81.24 A46 46 0 0 0 101.89 79"/>
+    <path stroke="#B256A1" d="M101.69 79.44 A46 46 0 0 0 102.68 77.16"/>
+    <path stroke="#A959A7" d="M102.5 77.6 A46 46 0 0 0 103.39 75.28"/>
+    <path stroke="#A05CAD" d="M103.23 75.73 A46 46 0 0 0 104.01 73.37"/>
+    <path stroke="#975FB3" d="M103.87 73.83 A46 46 0 0 0 104.55 71.44"/>
+    <path stroke="#8E62BA" d="M104.43 71.91 A46 46 0 0 0 105.01 69.49"/>
+    <path stroke="#8565C0" d="M104.91 69.96 A46 46 0 0 0 105.38 67.51"/>
+    <path stroke="#7C68C6" d="M105.3 67.99 A46 46 0 0 0 105.67 65.53"/>
+    <path stroke="#736BCC" d="M105.61 66 A46 46 0 0 0 105.86 63.53"/>
+    <path stroke="#6A6ED2" d="M105.82 64.01 A46 46 0 0 0 105.97 61.53"/>
+    <path stroke="#6171D8" d="M105.96 62.01 A46 46 0 0 0 106 59.52"/>
+    <path stroke="#5874DE" d="M106 60 A46 46 0 0 0 105.93 57.51"/>
+    <path stroke="#4F77E4" d="M105.96 57.99 A46 46 0 0 0 105.78 55.51"/>
+    <path stroke="#467AEA" d="M105.82 55.99 A46 46 0 0 0 105.54 53.52"/>
+    <path stroke="#3D7DF0" d="M105.61 54 A46 46 0 0 0 105.22 51.54"/>
+    <path stroke="#3480F6" d="M105.3 52.01 A46 46 0 0 0 104.8 49.57"/>
+    <path stroke="#2B83FC" d="M104.91 50.04 A46 46 0 0 0 104.43 48.09"/>
+    <path stroke="#F6F3EC" stroke-linecap="round" stroke-linejoin="round" d="M44 41 H84 L66.7 54.7"/>
+    <path stroke="#F6F3EC" stroke-linecap="round" stroke-linejoin="round" d="M53.3 65.3 L36 79 H76"/>
+    </g>
+</svg>
