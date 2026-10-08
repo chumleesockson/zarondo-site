@@ -62,17 +62,58 @@ ul {
 }
 
 li a {
+  position: relative;
+  isolation: isolate;
   display: grid;
   place-items: center;
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
   color: var(--paper);
+  transition: color 0.25s ease-out;
 }
 
 li svg { width: 1.5rem; height: 1.5rem; fill: currentColor; }
 
-li a:hover { background: var(--paper); color: var(--navy); }
+/* On hover, a drop lands in the middle of the icon and spreads out, with one ripple ring. */
+li a::before,
+li a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+li a::before {
+  background: var(--paper);
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+
+li a::after {
+  border: 2px solid var(--paper);
+  opacity: 0;
+}
+
+li a:hover,
+li a:focus-visible { color: var(--navy); }
+
+li a:hover::before,
+li a:focus-visible::before { transform: scale(1); }
+
+li a:hover::after,
+li a:focus-visible::after { animation: ripple 0.8s ease-out; }
+
+@keyframes ripple {
+  from { transform: scale(0.5); opacity: 0.8; }
+  to { transform: scale(1.8); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  li a, li a::before { transition: none; }
+  li a:hover::after, li a:focus-visible::after { animation: none; }
+}
 
 a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 
