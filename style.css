@@ -70,7 +70,7 @@ li a {
   height: 3rem;
   border-radius: 50%;
   color: var(--paper);
-  transition: color 0.25s ease-out;
+  transition: color 0.15s ease-out;
 }
 
 li svg { width: 1.5rem; height: 1.5rem; fill: currentColor; }
@@ -88,7 +88,7 @@ li a::after {
 li a::before {
   background: var(--paper);
   transform: scale(0);
-  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+  transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.25);
 }
 
 li a::after {
@@ -103,7 +103,7 @@ li a:hover::before,
 li a:focus-visible::before { transform: scale(1); }
 
 li a:hover::after,
-li a:focus-visible::after { animation: ripple 0.8s ease-out; }
+li a:focus-visible::after { animation: ripple 0.5s ease-out; }
 
 @keyframes ripple {
   from { transform: scale(0.5); opacity: 0.8; }
