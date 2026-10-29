@@ -1,23 +1,39 @@
+/* Every page preloads the WOFF2 (the layout), and text waits for it rather than
+   showing a stand-in font first, so nothing jumps when it arrives. It's Quicksand
+   cut down to Western European letters; the full TTF is the master copy. */
 @font-face {
   font-family: Quicksand;
-  src: url("assets/quicksand-variable.ttf") format("truetype");
+  src: url("assets/quicksand-variable.woff2") format("woff2"), url("assets/quicksand-variable.ttf") format("truetype");
   font-weight: 300 700;
-  font-display: swap;
+  font-display: block;
 }
 
 :root {
   --navy: #141B3A;
+  --navy-deep: #0D1229;
   --paper: #F6F3EC;
   --yellow: #FFC400;
   --muted: #B9BDD0;
+  /* The game's colours, taken from the key art. */
+  --mint: #2FC6B4;
+  --raspberry: #EC3F7C;
+  --lavender: #A77BE8;
+  --sunflower: #FFC400;
+  --bounce: cubic-bezier(0.2, 0.9, 0.3, 1.35);
+  --header: 5.5rem;
+  /* Everything but the hero lines up inside this width. */
+  --page: 72rem;
+  /* The hero's widest, which the header lines up with. */
+  --wide: 1680px;
+  --pill: 2.6rem;
 }
 
 * { box-sizing: border-box; }
 
-html { height: 100%; }
+html { scroll-behavior: smooth; }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -27,57 +43,604 @@ body {
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
-main {
-  flex: 1;
-  width: 100%;
-  max-width: 44rem;
-  margin: 0 auto;
-  padding: 4rem 1.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+main { flex: 1; }
 
-.logo {
-  width: min(30rem, 100%);
-  height: auto;
-}
-
-h1 { width: 100%; margin: 0; font-size: 1rem; line-height: 0; }
+h1, h2, h3 { font-weight: 700; line-height: 1.2; text-wrap: balance; }
 
 p { margin: 0; }
 
-ul {
-  list-style: none;
-  margin: 2.5rem 0 1.5rem;
+a { color: var(--yellow); }
+
+a:focus-visible,
+button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* The Zarondo bar at the top of every page. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgb(20 27 58 / 0.85);
+  backdrop-filter: blur(10px);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: var(--wide);
+  height: var(--header);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 3vw, 3rem);
+}
+
+.studio { display: block; }
+
+.studio svg { display: block; width: auto; height: 2.6rem; overflow: visible; }
+
+/* The logo waits hidden until site.js starts building it, so it doesn't show whole
+   and then vanish. If the script never runs, it shows anyway after a moment. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .studio-logo:not(.ready) { opacity: 0; animation: show-anyway 0s 1.5s forwards; }
+}
+
+@keyframes show-anyway { to { opacity: 1; } }
+
+.site-header ul {
+  display: flex;
+  /* Room for the Eben's head between the pills. */
+  gap: calc(var(--pill) * 0.95);
+  margin: 0;
   padding: 0;
+  list-style: none;
+}
+
+/* The menu works like the game's: raised cream pills, and the one you're on lifts,
+   gets a navy bar under its word, and has an Eben peeking out from behind its left
+   end (docs/ui-rules.md in the game). The page you're on is the yellow one. */
+.site-header li { position: relative; }
+
+.site-header li::before {
+  content: "";
+  position: absolute;
+  /* Placed as the game's EbenPeek places it: the head as tall as the pill, its
+     middle level with the pill's, and the pill's end just past the eye. */
+  left: calc(var(--pill) * -0.8);
+  top: calc(var(--pill) * -0.51);
+  width: calc(var(--pill) * 1.076);
+  height: calc(var(--pill) * 1.444);
+  background: url("assets/puffoonery/eben-peek.webp") center / contain no-repeat;
+  opacity: 0;
+  transform: translateX(calc(var(--pill) * 0.5));
+  transition: transform 0.15s ease-out, opacity 0.1s;
+  pointer-events: none;
+}
+
+.site-header li:hover::before,
+.site-header li:focus-within::before { opacity: 1; transform: none; }
+
+.site-header li:active::before { background-image: url("assets/puffoonery/eben-peek-blink.webp"); }
+
+.site-header nav a {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  height: var(--pill);
+  padding: 0 1.3rem;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, #FBF8F1, #EDE5D6);
+  color: var(--navy);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: inset 0 -0.2rem 0 rgb(0 0 0 / 0.08), 0 0.25rem 0 #C9BFAE, 0 0.5rem 0.9rem rgb(0 0 0 / 0.3);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.site-header nav a[aria-current="page"] {
+  background: linear-gradient(to bottom, #FFD43A, var(--yellow));
+  box-shadow: inset 0 -0.2rem 0 rgb(0 0 0 / 0.08), 0 0.25rem 0 #C99A00, 0 0.5rem 0.9rem rgb(0 0 0 / 0.3);
+}
+
+.site-header nav a::after {
+  content: "";
+  position: absolute;
+  left: 1.3rem;
+  right: 1.3rem;
+  bottom: 0.4rem;
+  height: 0.2rem;
+  border-radius: 999px;
+  background: var(--navy);
+  transform: scaleX(0);
+  transition: transform 0.15s ease-out;
+}
+
+.site-header nav a:hover,
+.site-header nav a:focus-visible { transform: translateY(-0.2rem); }
+
+.site-header nav a:hover::after,
+.site-header nav a:focus-visible::after { transform: none; }
+
+.site-header nav a:active { transform: translateY(0.1rem); box-shadow: inset 0 -0.2rem 0 rgb(0 0 0 / 0.08), 0 0.1rem 0 #C9BFAE, 0 0.25rem 0.5rem rgb(0 0 0 / 0.3); }
+
+/* The Wishlist button, or "Coming soon" until page day. */
+.steam-button {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-decoration: none;
+  box-shadow: 0 0.35rem 0 #C99A00, 0 0.75rem 1.5rem rgb(0 0 0 / 0.3);
+  transition: transform 0.25s var(--bounce);
+}
+
+a.steam-button:hover { transform: scale(1.08); }
+
+a.steam-button:active { transform: scale(0.94, 0.88); }
+
+/* Until page day it breathes in and out, like a suit filling with air. */
+.steam-button.soon { animation: breathe 3s ease-in-out infinite; }
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06, 1.04); }
+}
+
+/* Home: the hero. */
+.hero {
+  position: relative;
+  display: grid;
+  min-height: min(88vh, 60rem);
+  overflow: hidden;
+  isolation: isolate;
+  /* Up under the see-through header. Past the key art's own width it stops growing,
+     so it's never blown up into a blur. */
+  max-width: var(--wide);
+  margin: calc(var(--header) * -1) auto 0;
+}
+
+@media (min-width: 1681px) {
+  .hero { border-radius: 0 0 2rem 2rem; }
+}
+
+.hero-art {
+  position: absolute;
+  inset: -4% 0;
+  z-index: -2;
+}
+
+.hero-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+  animation: drift 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes drift {
+  from { transform: scale(1.04) translate(0, 0); }
+  to { transform: scale(1.1) translate(-1.5%, 1%); }
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  /* A pixel past the bottom, so no sliver of the moving art shows under it. */
+  inset: 0 0 -1px;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom, rgb(20 27 58 / 0.55), transparent 22%),
+    linear-gradient(to top, var(--navy) 0%, rgb(20 27 58 / 0.6) 18%, transparent 45%);
+  pointer-events: none;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: calc(var(--header) + 1.5rem) 1.5rem 3rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hero-content > * { pointer-events: auto; }
+
+.hero h1 { margin: 0; line-height: 0; }
+
+.game-logo {
+  width: min(34rem, 82vw);
+  height: auto;
+  filter: drop-shadow(0 0.75rem 1.25rem rgb(13 18 41 / 0.45));
+  animation: drop-in 1s var(--bounce) both, bob 5s ease-in-out 1s infinite;
+  transform-origin: 50% 100%;
+}
+
+/* site.js wobbles the heading round the logo as the mouse comes on and goes off it,
+   so the logo's own bob carries on underneath. */
+.hero h1.wobble { animation: jelly 0.7s ease-out; }
+
+.hero h1.settle { animation: settle 0.6s ease-out; }
+
+@keyframes drop-in {
+  0% { opacity: 0; transform: translateY(-3rem) scale(0.6, 1.3); }
+  55% { opacity: 1; transform: translateY(0) scale(1.12, 0.86); }
+  75% { transform: scale(0.95, 1.06); }
+  100% { transform: none; }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-0.6rem) rotate(-1deg); }
+}
+
+@keyframes settle {
+  0% { transform: scale(1); }
+  35% { transform: scale(0.96, 1.04); }
+  65% { transform: scale(1.02, 0.98); }
+  100% { transform: scale(1); }
+}
+
+@keyframes jelly {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.1, 0.9); }
+  50% { transform: scale(0.93, 1.07); }
+  70% { transform: scale(1.04, 0.97); }
+  100% { transform: scale(1); }
+}
+
+/* Home: the pitch. */
+.pitch {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 2rem;
+  text-align: center;
+}
+
+.pitch h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--yellow);
+}
+
+
+/* Home: what's in the game. */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem 3rem;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.feature { padding-top: 1.25rem; border-top: 3px solid var(--accent, var(--mint)); }
+
+.feature:nth-child(2) { --accent: var(--raspberry); }
+.feature:nth-child(3) { --accent: var(--lavender); }
+
+.feature h3 { margin: 0 0 0.4rem; font-size: 1.35rem; }
+
+.feature p { color: var(--muted); font-size: 1.05rem; }
+
+/* Home: the arenas. */
+.arenas {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  text-align: center;
+}
+
+.arenas h2 { margin: 0 0 1.75rem; font-size: clamp(1.5rem, 3.5vw, 2.1rem); }
+
+.arenas ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.arenas li {
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 0.75rem 1.5rem rgb(0 0 0 / 0.35);
+}
+
+.arenas img { display: block; width: 100%; height: auto; transition: transform 0.6s ease-out; }
+
+.arenas li:hover img { transform: scale(1.04); }
+
+/* A name over a picture is a flat label, not a pill (the game's own rule). */
+.arenas span {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.65rem;
+  padding: 0.1rem 0.7rem;
+  border-radius: 0.5rem;
+  background: rgb(20 27 58 / 0.8);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* Home: the career. */
+.career {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.career h2 { margin: 0 0 0.75rem; font-size: clamp(1.5rem, 3.5vw, 2.1rem); }
+
+.career p { color: var(--muted); }
+
+.trophies {
+  position: relative;
+  width: min(100%, 26rem);
+  margin: 0 auto;
+  aspect-ratio: 900 / 631;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.6rem); }
+}
+
+.trophies img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 1.5rem 1.5rem rgb(0 0 0 / 0.45));
+}
+
+/* A gleam sweeps across the metal every few seconds. It's cut to the trophies'
+   own shape, so it never shows on the page around them. */
+.trophies::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgb(255 255 255 / 0.55) 48%, rgb(255 255 255 / 0.8) 50%, rgb(255 255 255 / 0.55) 52%, transparent 60%) no-repeat;
+  background-size: 250% 100%;
+  mask: url("assets/puffoonery/trophies.webp") center / contain no-repeat;
+  mix-blend-mode: soft-light;
+  animation: gleam 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes gleam {
+  0%, 55% { background-position: 130% 0; }
+  85%, 100% { background-position: -30% 0; }
+}
+
+/* The saucer's three lights blink in turn. */
+.lamp {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 9%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(255 236 150 / 0.95), rgb(255 212 58 / 0.5) 45%, transparent);
+  mix-blend-mode: screen;
+  opacity: 0.2;
+  animation: lamp 1.2s ease-in-out var(--wait, 0s) infinite;
+  pointer-events: none;
+}
+
+@keyframes lamp {
+  0%, 100% { opacity: 0.2; scale: 0.8; }
+  30% { opacity: 1; scale: 1.1; }
+}
+
+/* Now and then a highlight catches the light. */
+.twinkle {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 7%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  background: radial-gradient(closest-side, white, rgb(255 255 255 / 0.6) 20%, transparent 60%);
+  clip-path: polygon(50% 0, 56% 44%, 100% 50%, 56% 56%, 50% 100%, 44% 56%, 0 50%, 44% 44%);
+  opacity: 0;
+  animation: twinkle 6s ease-in-out var(--wait, 0s) infinite;
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  0%, 82%, 100% { opacity: 0; transform: scale(0.2) rotate(0); }
+  90% { opacity: 1; transform: scale(1) rotate(45deg); }
+}
+
+/* Home: the sign-off. */
+.closing {
+  padding: 3rem 1.5rem 4rem;
+  text-align: center;
+}
+
+.closing h2 { margin: 0 0 1.75rem; font-size: clamp(2rem, 5vw, 3rem); }
+
+
+/* About. */
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(14rem, 22rem) 1fr;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 7vw, 5rem) 1.5rem 3rem;
+}
+
+.portrait {
+  position: relative;
+  margin: 0;
+  isolation: isolate;
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2rem;
+  border: 0.4rem solid var(--paper);
+  box-shadow: 0 1.25rem 2.5rem rgb(0 0 0 / 0.4);
+  rotate: -2deg;
+  transition: rotate 0.35s var(--bounce);
+}
+
+.portrait:hover img { rotate: 0deg; }
+
+/* The Eben peeks out from behind the photo, as it does from the menu: mirrored, so
+   it peeks from the right edge, where there's room. */
+.portrait::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 94%;
+  top: 26%;
+  width: 19%;
+  aspect-ratio: 149 / 200;
+  background: url("assets/puffoonery/eben-peek.webp") center / contain no-repeat;
+  scale: -1 1;
+  rotate: 10deg;
+  opacity: 0;
+  translate: -55% 0;
+  transition: translate 0.2s ease-out, opacity 0.12s;
+}
+
+.portrait:hover::before { opacity: 1; translate: 0 0; }
+
+.about-text h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  color: var(--yellow);
+}
+
+.about-text p + p { margin-top: 1rem; }
+
+.about-text a,
+.about-more a { color: var(--paper); text-decoration-color: rgb(246 243 236 / 0.4); text-underline-offset: 0.2em; }
+
+.about-text a:hover,
+.about-more a:hover { text-decoration-color: currentColor; }
+
+.about-more {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 2rem 3rem;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 1rem 1.5rem 5rem;
+}
+
+.about-more article { padding-top: 1.25rem; border-top: 3px solid var(--accent, var(--mint)); }
+
+.about-more article:nth-child(2) { --accent: var(--raspberry); }
+
+.about-more h2 { margin: 0 0 0.5rem; font-size: 1.35rem; }
+
+.about-more p { color: var(--muted); font-size: 1.05rem; }
+
+.contacts { margin: 0; padding: 0; list-style: none; font-size: 1.05rem; }
+
+.contacts li + li { margin-top: 0.4rem; }
+
+/* Privacy and Terms: plain, readable prose. */
+.legal {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4rem) 1.5rem 5rem;
+  font-size: 1.1rem;
+}
+
+.legal h1 { margin: 0; font-size: clamp(2.2rem, 6vw, 3rem); color: var(--yellow); }
+
+.legal .updated { margin: 0.25rem 0 2rem; color: var(--muted); font-size: 0.95rem; }
+
+.legal h2 { margin: 2.25rem 0 0.6rem; font-size: 1.35rem; }
+
+.legal p + p { margin-top: 0.9rem; }
+
+.legal p { color: rgb(246 243 236 / 0.88); }
+
+.legal a { color: var(--paper); text-decoration-color: rgb(246 243 236 / 0.4); text-underline-offset: 0.2em; }
+
+.legal a:hover { text-decoration-color: currentColor; }
+
+/* Sections bounce in as they scroll into view. site.js adds .in. */
+.js .reveal { opacity: 0; transform: translateY(2rem) scale(0.96); }
+
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.5s ease-out, transform 0.7s var(--bounce);
+}
+
+/* The footer: small and quiet until page day. */
+.site-footer {
+  padding: 2rem 1.5rem 1.75rem;
+  border-top: 1px solid rgb(246 243 236 / 0.08);
+  background: var(--navy-deep);
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.site-footer ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
 }
 
-li a {
+.socials ul { gap: 0.15rem; }
+
+.socials a {
   position: relative;
   isolation: isolate;
   display: grid;
   place-items: center;
-  width: 3rem;
-  height: 3rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 50%;
-  color: var(--paper);
+  color: var(--muted);
   transition: color 0.15s ease-out;
 }
 
-li svg { width: 1.5rem; height: 1.5rem; fill: currentColor; }
+.socials svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
 
 /* On hover, a drop lands in the middle of the icon and spreads out, with one ripple ring. */
-li a::before,
-li a::after {
+.socials a::before,
+.socials a::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -85,48 +648,84 @@ li a::after {
   border-radius: 50%;
 }
 
-li a::before {
+.socials a::before {
   background: var(--paper);
   transform: scale(0);
-  transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+  transition: transform 0.25s var(--bounce);
 }
 
-li a::after {
-  border: 2px solid var(--paper);
-  opacity: 0;
-}
+.socials a::after { border: 2px solid var(--paper); opacity: 0; }
 
-li a:hover,
-li a:focus-visible { color: var(--navy); }
+.socials a:hover,
+.socials a:focus-visible { color: var(--navy); }
 
-li a:hover::before,
-li a:focus-visible::before { transform: scale(1); }
+.socials a:hover::before,
+.socials a:focus-visible::before { transform: scale(1); }
 
-li a:hover::after,
-li a:focus-visible::after { animation: ripple 0.5s ease-out; }
+.socials a:hover::after,
+.socials a:focus-visible::after { animation: ripple 0.5s ease-out; }
 
 @keyframes ripple {
   from { transform: scale(0.5); opacity: 0.8; }
   to { transform: scale(1.8); opacity: 0; }
 }
 
+/* Each icon's name pops up above it on hover, as a flat cream label with a little
+   point, like the game's labels. */
+.socials .tip {
+  position: absolute;
+  bottom: calc(100% + 0.6rem);
+  left: 50%;
+  padding: 0.2rem 0.65rem;
+  border-radius: 0.5rem;
+  background: var(--paper);
+  color: var(--navy);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%) translateY(0.4rem) scale(0.7);
+  transform-origin: 50% 100%;
+  transition: opacity 0.12s ease-out, transform 0.25s var(--bounce);
+}
+
+.socials .tip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  translate: -50% 0;
+  border: 0.35rem solid transparent;
+  border-top-color: var(--paper);
+}
+
+.socials a:hover .tip,
+.socials a:focus-visible .tip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.footer-links { gap: 0.4rem 1.5rem; }
+
+.footer-links a { color: var(--muted); text-decoration: none; }
+
+.footer-links a:hover { color: var(--paper); text-decoration: underline; }
+
+@media (max-width: 40rem) {
+  body { font-size: 1.1rem; }
+  :root { --header: 4.6rem; --pill: 2.2rem; }
+  .studio svg { height: 2rem; }
+  .site-header nav a { padding: 0 0.9rem; font-size: 0.95rem; }
+  .hero { min-height: 92vh; }
+  .career { grid-template-columns: 1fr; text-align: center; }
+  .about-intro { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .portrait { width: min(16rem, 70vw); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  li a, li a::before { transition: none; }
-  li a:hover::after, li a:focus-visible::after { animation: none; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .reveal { opacity: 1; transform: none; }
 }
-
-a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
-
-.contact { font-size: 1rem; }
-
-.contact a { color: var(--muted); text-decoration: none; }
-
-.contact a:hover { color: var(--paper); text-decoration: underline; }
-
-footer {
-  padding: 1.5rem;
-  text-align: center;
-  color: var(--muted);
-  font-size: 1rem;
-}
-
