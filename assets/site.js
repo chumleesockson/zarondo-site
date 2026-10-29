@@ -57,17 +57,32 @@ function startReveals(sections) {
   check();
 }
 
-// The key art moves a little slower than the page, for a bit of depth.
-function startParallax(art) {
+// The key art (and the gameplay over it) moves a little slower than the page, for a
+// bit of depth.
+function startParallax(layers) {
   let ticking = false;
   addEventListener("scroll", () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      art.style.transform = `translateY(${Math.min(scrollY, innerHeight) * 0.3}px)`;
+      const shift = `translateY(${Math.min(scrollY, innerHeight) * 0.3}px)`;
+      layers.forEach((layer) => { layer.style.transform = shift; });
       ticking = false;
     });
   }, { passive: true });
+}
+
+// The gameplay loop plays over the key art on landscape screens, unless the visitor
+// asked to save data. It fades in once it's actually playing, so a slow load just
+// shows the key art, and it rests while the hero is scrolled out of sight.
+function startGameplay(video) {
+  if (matchMedia("(max-aspect-ratio: 4/5)").matches) return;
+  if (navigator.connection?.saveData) return;
+  video.addEventListener("playing", () => video.classList.add("playing"), { once: true });
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) video.play().catch(() => {});
+    else video.pause();
+  }).observe(video);
 }
 
 // The studio logo builds itself when the site is first opened or the page is
@@ -309,8 +324,10 @@ function freshLoad() {
 const studio = document.querySelector(".studio");
 const heading = document.querySelector(".hero h1");
 const art = document.querySelector(".hero-art");
+const gameplay = document.querySelector(".hero-video");
 if (studio && !calm) startSplash(studio);
 else studio?.querySelector(".studio-logo").classList.add("ready");
 if (heading && !calm) startWobble(heading);
-if (art && !calm) startParallax(art);
+if (art && !calm) startParallax([art, gameplay].filter(Boolean));
+if (gameplay && !calm) startGameplay(gameplay);
 startReveals(document.querySelectorAll(".reveal"));

@@ -35,5 +35,11 @@ The studio logo files are generated in the game repository, under
 `docs/concept-art/brand` there, resized to WebP. Copy new versions from there; do not edit
 them here.
 
+The hero's gameplay loop (`assets/puffoonery/hero-loop.mp4` and `hero-loop-av1.mp4`) and
+the arena stills are filmed from the built game by `tools/site_footage.py` in the game
+repository, which writes them to `C:\games\builds\zarondo-site-footage`. The stills are
+resized to 800×450 WebP here. Keep each loop under about 6 MB; it only plays on landscape
+screens, so phones held upright get the tall key art and don't download it.
+
 The social icons are from Simple Icons (simpleicons.org), released under CC0.
 Quicksand is under the SIL Open Font Licence; see `assets/quicksand-licence.txt`.

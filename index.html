@@ -12,6 +12,12 @@ body_class: home
     <source media="(max-width: 960px)" srcset="/assets/puffoonery/key-art-wide-960.webp">
     <img src="/assets/puffoonery/key-art-wide.webp" alt="A small mint Eben fires jelly bubbles at a pink Eben pumped up so big it's about to pop, while another Eben pops behind them." width="1672" height="941" fetchpriority="high">
   </picture>
+  <!-- Gameplay from the built game, fading in over the key art once it plays. site.js
+       starts it only on landscape screens, and not for reduced motion or Save-Data. -->
+  <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true">
+    <source src="/assets/puffoonery/hero-loop-av1.mp4" type='video/mp4; codecs="av01.0.08M.08"'>
+    <source src="/assets/puffoonery/hero-loop.mp4" type='video/mp4; codecs="avc1.640033"'>
+  </video>
   <div class="hero-content">
     <h1><img class="game-logo" src="/assets/puffoonery/logo.webp" alt="Ebens Puffoonery" width="900" height="511"></h1>
     {% include steam-button.html %}
@@ -40,9 +46,9 @@ body_class: home
 <section class="arenas reveal" aria-labelledby="arenas-title">
   <h2 id="arenas-title">Twelve arenas, from a seaside funfair to Mars</h2>
   <ul>
-    <li><img src="/assets/puffoonery/arenas/funfair.webp" alt="Funfair: a British seaside funfair on the promenade, with a carousel and helter-skelters." width="800" height="450" loading="lazy"><span>Funfair</span></li>
-    <li><img src="/assets/puffoonery/arenas/roswell.webp" alt="Roswell: Ebens fighting among the wreckage of a crashed flying saucer on a ranch." width="800" height="450" loading="lazy"><span>Roswell</span></li>
-    <li><img src="/assets/puffoonery/arenas/meadow.webp" alt="Meadow: wheat fields, dry-stone walls and an old oak in the English countryside." width="800" height="450" loading="lazy"><span>Meadow</span></li>
+    <li><img src="/assets/puffoonery/arenas/funfair.webp" alt="Funfair: an untied Eben's tank sprays loose balloon shots across the promenade, by a helter-skelter and a carousel." width="800" height="450" loading="lazy"><span>Funfair</span></li>
+    <li><img src="/assets/puffoonery/arenas/roswell.webp" alt="Roswell: a pink Eben grabs a mint Eben with the crashed saucer's ray, in front of the wreck." width="800" height="450" loading="lazy"><span>Roswell</span></li>
+    <li><img src="/assets/puffoonery/arenas/meadow.webp" alt="Meadow: Ebens popping in a crop circle turned raspberry, round its standing stone." width="800" height="450" loading="lazy"><span>Meadow</span></li>
   </ul>
 </section>
 
