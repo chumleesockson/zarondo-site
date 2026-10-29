@@ -15,7 +15,8 @@ body_class: legal-page
   <p>Zarondo Games is the trading name of Zarondo Ltd, a company registered in England and Wales, company number 17508779. We decide how your information is used, which makes us its "controller" under UK data protection law. You can reach us about anything on this page at <a href="mailto:hello@zarondo.com">hello@zarondo.com</a>.</p>
 
   <h2>This website</h2>
-  <p>This website doesn't use cookies, analytics or any other tracking, and it doesn't ask you for anything. It loads nothing from other companies' servers.</p>
+  {% if site.umami_website_id %}<p>This website doesn't use cookies, and it doesn't ask you for anything.</p>
+  <p>We count visits with <a href="https://umami.is/">Umami</a>, so we can see how many people visit, which pages they read and where they came from. It records the page, the site that sent you, your browser, operating system, type of device and country, and clicks on our Steam and social media links. It doesn't use cookies or store anything on your device, it doesn't keep your IP address, and it can't follow you across other websites. Umami runs it for us and doesn't use it for anything else. We do this because it's in our legitimate interests to know how the site is doing, and we keep the figures for up to two years.</p>{% else %}<p>This website doesn't use cookies, analytics or any other tracking, and it doesn't ask you for anything. It loads nothing from other companies' servers.</p>{% endif %}
   <p>It's hosted by GitHub Pages. Like any web host, GitHub records the technical details of each visit, such as your IP address, for security and to keep the service running. We don't see those records. GitHub explains what it does in its <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a>.</p>
   <p>If you follow a link to one of our social media accounts or to another site, that site's own privacy policy applies.</p>
 
@@ -33,7 +34,7 @@ body_class: legal-page
   <p>We use this information because it's in our legitimate interests to run our accounts and talk to our community. We keep comments and messages for as long as they stay on the platform, and our own copies for no more than two years. Each platform also has its own privacy policy, which applies to everything you do there.</p>
 
   <h2>Who we share it with</h2>
-  <p>We don't sell your information, and we don't share it with anyone for their own use. The services we use to run the company, such as Google for email and the social media platforms themselves, handle it for us.</p>
+  <p>We don't sell your information, and we don't share it with anyone for their own use. The services we use to run the company, such as Google for email{% if site.umami_website_id %}, Umami for counting visits{% endif %} and the social media platforms themselves, handle it for us.</p>
   <p>Some of these companies store information outside the UK, mostly in the United States. Where they do, they protect it with the safeguards UK law requires, such as the UK–US data bridge or standard contract terms approved for international transfers.</p>
 
   <h2>Your rights</h2>

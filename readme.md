@@ -18,6 +18,11 @@ builds it with Jekyll, so every page shares one header and footer.
 **Page day:** put the Steam store link in `steam_url` in `_config.yml`. Every "Coming soon
 to Steam" turns into a Wishlist on Steam button.
 
+**Analytics:** put the site's Umami Cloud ID in `umami_website_id` in `_config.yml`. Every
+page then loads Umami's script (counting on zarondo.com only, so previews aren't counted), and
+the privacy page describes it; while it's empty, neither happens. The Wishlist button and the
+social icons are tagged with `data-umami-event`, so their clicks are counted as events.
+
 **Previewing:** the `site` entry in `.claude/launch.json` runs GitHub Pages' version of Jekyll
 in Docker at http://localhost:4000. The first time, install the gems into the Docker volume:
 

@@ -7,5 +7,9 @@ lang: en-GB
 # "Coming soon to Steam" wherever the Wishlist button will go.
 steam_url:
 
+# The site's ID from Umami Cloud (cloud.umami.is), which counts visits without
+# cookies. While it's empty, nothing is counted and the privacy page says so.
+umami_website_id:
+
 exclude:
   - readme.md
