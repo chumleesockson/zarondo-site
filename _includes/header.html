@@ -1,0 +1,12 @@
+<header class="site-header">
+  <div class="bar">
+    <a class="studio" href="/">{% include studio-logo.svg %}</a>
+    <!-- As in the game's menus, an Eben peeks out from behind the link you're on. -->
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>Puffoonery</a></li>
+        <li><a href="/about/"{% if page.url == "/about/" %} aria-current="page"{% endif %}>About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

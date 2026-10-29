@@ -1,0 +1,15 @@
+title: Zarondo Games
+description: Zarondo Games is an indie game studio from the UK.
+url: https://zarondo.com
+lang: en-GB
+
+# On page day, put the Steam store link here. While it's empty, the site says
+# "Coming soon to Steam" wherever the Wishlist button will go.
+steam_url:
+
+# The site's ID from Umami Cloud (cloud.umami.is), which counts visits without
+# cookies. While it's empty, nothing is counted and the privacy page says so.
+umami_website_id: 2877235c-517a-4f6d-b187-a4eb64a8b927
+
+exclude:
+  - readme.md
