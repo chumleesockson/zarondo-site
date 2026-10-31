@@ -13,3 +13,4 @@ umami_website_id: 2877235c-517a-4f6d-b187-a4eb64a8b927
 
 exclude:
   - readme.md
+  - tools

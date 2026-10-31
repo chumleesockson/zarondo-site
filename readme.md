@@ -6,7 +6,8 @@ builds it with Jekyll, so every page shares one header and footer.
 - `_layouts/default.html` is the page shell; `_includes/` holds the header, the footer
   (with the social icons) and the Steam button.
 - `index.html` is the home page, which is the Ebens Puffoonery page.
-- `about.html`, `privacy.html` and `terms.html` are the other pages.
+- `about.html`, `press.html`, `privacy.html` and `terms.html` are the other pages. The
+  press kit is linked from the footer and the About page, not the main menu.
 - `style.css` styles every page; `assets/site.js` is the movement: the studio logo building
   itself as the game's splash does, the game logo's wobble, the key art's depth, and sections
   bouncing in.
@@ -40,6 +41,12 @@ the arena stills are filmed from the built game by `tools/site_footage.py` in th
 repository, which writes them to `C:\games\builds\zarondo-site-footage`. The stills are
 resized to 800×450 WebP here. Keep each loop under about 6 MB; it only plays on landscape
 screens, so phones held upright get the tall key art and don't download it.
+
+The press kit's downloads (`assets/press/`: screenshots, logos, key art, the photo and one
+zip of the lot) are made by `tools/make_press_kit.py`, from the game repository and the
+Steam screenshots in `C:\games\builds\steam-screenshots`. Run it again when either changes;
+if the files change, update the list and sizes in `press.html` and the zip's size on its
+button.
 
 The social icons are from Simple Icons (simpleicons.org), released under CC0.
 Quicksand is under the SIL Open Font Licence; see `assets/quicksand-licence.txt`.
