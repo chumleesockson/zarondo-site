@@ -43,8 +43,9 @@ resized to 800×450 WebP here. Keep each loop under about 6 MB; it only plays on
 screens, so phones held upright get the tall key art and don't download it.
 
 The press kit's downloads (`assets/press/`: screenshots, logos, key art, the photo and one
-zip of the lot) are made by `tools/make_press_kit.py`, from the game repository and the
-Steam screenshots in `C:\games\builds\steam-screenshots`. Run it again when either changes;
+zip of the lot) are made by `tools/make_press_kit.py`, from the game repository, the
+Steam screenshots in `C:\games\builds\steam-screenshots` and the full-size headshot (a copy
+of the one in Drive, Marketing › Photos of Charlie). Run it again when any of them changes;
 if the files change, update the list and sizes in `press.html` and the zip's size on its
 button.
 

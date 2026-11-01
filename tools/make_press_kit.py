@@ -3,7 +3,8 @@ small previews the page shows, and one zip of everything.
 
 Run from the site's folder after the screenshots or brand art change:
     python tools/make_press_kit.py .
-It reads the game repository and the Steam screenshots folder, and replaces assets/press/.
+It reads the game repository, the Steam screenshots folder and the headshot, and replaces
+assets/press/.
 """
 import shutil, sys, zipfile
 from pathlib import Path
@@ -12,6 +13,9 @@ from PIL import Image
 site = Path(sys.argv[1])
 game = Path(r"C:\games\menlarger")
 shots = Path(r"C:\games\builds\steam-screenshots")
+# The full-size headshot: a copy of Drive's Marketing › Photos of Charlie › "Charlie Sexton
+# headshot.png". The About page uses a small cut of the same picture.
+headshot = Path(r"C:\Users\charl\Downloads\Charles-Sexton.png")
 brand = game / "docs/concept-art/brand"
 studio = brand / "studio/png"
 
@@ -45,7 +49,7 @@ art = [
     (studio / "logo-horizontal-games-2000.png", "zarondo-games-logo", "png"),
     (studio / "logo-horizontal-games-dark-2000.png", "zarondo-games-logo-for-dark", "png"),
     (studio / "icon-1024.png", "zarondo-games-icon", "png"),
-    (site / "assets/about/charlie-sexton.webp", "charlie-sexton", "jpg"),
+    (headshot, "charlie-sexton", "jpg"),
 ]
 for src, name, kind in art:
     im = Image.open(src)
