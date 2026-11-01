@@ -176,8 +176,9 @@ button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 
 .site-header nav a:active { transform: translateY(0.1rem); box-shadow: inset 0 -0.2rem 0 rgb(0 0 0 / 0.08), 0 0.1rem 0 #C9BFAE, 0 0.25rem 0.5rem rgb(0 0 0 / 0.3); }
 
-/* The Wishlist button, or "Coming soon" until page day. */
-.steam-button {
+/* The Wishlist button, or "Coming soon" until page day, and other big buttons. */
+.steam-button,
+.button {
   display: inline-block;
   padding: 0.75rem 1.75rem;
   border-radius: 999px;
@@ -190,9 +191,11 @@ button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
   transition: transform 0.25s var(--bounce);
 }
 
-a.steam-button:hover { transform: scale(1.08); }
+a.steam-button:hover,
+a.button:hover { transform: scale(1.08); }
 
-a.steam-button:active { transform: scale(0.94, 0.88); }
+a.steam-button:active,
+a.button:active { transform: scale(0.94, 0.88); }
 
 /* Until page day it breathes in and out, like a suit filling with air. */
 .steam-button.soon { animation: breathe 3s ease-in-out infinite; }
@@ -612,6 +615,174 @@ a.steam-button:active { transform: scale(0.94, 0.88); }
 
 .legal a:hover { text-decoration-color: currentColor; }
 
+/* Press kit. */
+.press-intro {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 7vw, 5rem) 1.5rem 2rem;
+}
+
+.press-intro h1 { margin: 0 0 0.75rem; font-size: clamp(2.2rem, 6vw, 3.4rem); color: var(--yellow); }
+
+.press-intro > p:first-of-type { max-width: 44rem; }
+
+.press-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  margin-top: 2rem;
+}
+
+.press main a:not(.button) { color: var(--paper); text-decoration-color: rgb(246 243 236 / 0.4); text-underline-offset: 0.2em; }
+
+.press main a:not(.button):hover { text-decoration-color: currentColor; }
+
+.press-facts {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 2rem clamp(2rem, 5vw, 4rem);
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.press h2 { margin: 0 0 0.75rem; font-size: 1.6rem; }
+
+.fact-sheet dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem 1.5rem;
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1.25rem;
+  background: var(--navy-deep);
+  font-size: 1.05rem;
+}
+
+.fact-sheet dt { color: var(--muted); }
+
+.fact-sheet dd { margin: 0; }
+
+.press-text p { color: var(--muted); font-size: 1.05rem; }
+
+.press-text p + p { margin-top: 0.9rem; }
+
+.press-text .pitch-line { color: var(--yellow); font-size: 1.3rem; font-weight: 700; line-height: 1.35; }
+
+.press-features {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.press-features ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1rem 3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.press-features strong { display: block; color: var(--paper); }
+
+.press-more {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 2rem 3rem;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.press-more article { padding-top: 1.25rem; border-top: 3px solid var(--accent, var(--mint)); }
+
+.press-more article:nth-child(2) { --accent: var(--raspberry); }
+
+.press-more h2 { font-size: 1.35rem; margin-bottom: 0.5rem; }
+
+.press-more p { color: var(--muted); font-size: 1.05rem; }
+
+.press-gallery {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.press-gallery:last-child { padding-bottom: 5rem; }
+
+.gallery-note { margin-bottom: 1.25rem; color: var(--muted); font-size: 0.95rem; }
+
+.press-gallery ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Screenshots look like the home page's arenas, with the same flat labels. */
+.shots a {
+  position: relative;
+  display: block;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0.75rem 1.5rem rgb(0 0 0 / 0.35);
+}
+
+.shots img { display: block; width: 100%; height: auto; transition: transform 0.6s ease-out; }
+
+.shots a:hover img { transform: scale(1.04); }
+
+.shots span {
+  position: absolute;
+  left: 0.6rem;
+  bottom: 0.5rem;
+  padding: 0.05rem 0.6rem;
+  border-radius: 0.5rem;
+  background: rgb(20 27 58 / 0.8);
+  color: var(--paper);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* Each logo sits on the background it's made for. */
+.press .art a { display: block; text-decoration: none; }
+
+.art .tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: 1rem;
+  background: var(--navy-deep);
+  box-shadow: 0 0.75rem 1.5rem rgb(0 0 0 / 0.35);
+  transition: transform 0.25s var(--bounce);
+}
+
+.art .light .tile { background: var(--paper); }
+
+.art .photo .tile { overflow: hidden; }
+
+.art img {
+  position: absolute;
+  inset: 1.25rem;
+  width: calc(100% - 2.5rem);
+  height: calc(100% - 2.5rem);
+  object-fit: contain;
+}
+
+.art .photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.art a:hover .tile { transform: scale(1.04); }
+
+.art .name { display: block; margin-top: 0.6rem; font-size: 1rem; font-weight: 700; line-height: 1.3; }
+
+.art .size { display: block; color: var(--muted); font-size: 0.9rem; }
+
 /* Sections bounce in as they scroll into view. site.js adds .in. */
 .js .reveal { opacity: 0; transform: translateY(2rem) scale(0.96); }
 
@@ -739,6 +910,9 @@ a.steam-button:active { transform: scale(0.94, 0.88); }
   .hero { min-height: calc(96vh - var(--header)); }
   .career { grid-template-columns: 1fr; text-align: center; }
   .about-intro { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .press-facts { grid-template-columns: 1fr; }
+  .fact-sheet dl { grid-template-columns: 1fr; gap: 0 1rem; }
+  .fact-sheet dd + dt { margin-top: 0.6rem; }
   .portrait { width: min(16rem, 70vw); }
 }
 
