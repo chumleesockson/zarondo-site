@@ -6,8 +6,11 @@ builds it with Jekyll, so every page shares one header and footer.
 - `_layouts/default.html` is the page shell; `_includes/` holds the header, the footer
   (with the social icons) and the Steam button.
 - `index.html` is the home page, which is the Ebens Puffoonery page.
-- `about.html`, `press.html`, `privacy.html` and `terms.html` are the other pages. The
-  press kit is linked from the footer and the About page, not the main menu.
+- `about.html`, `press.html`, `privacy.html`, `terms.html` and `data-deletion.html` are the
+  other pages. The press kit is linked from the footer and the About page, not the main menu.
+  The data deletion page is linked from the privacy page's "Deleting your information"
+  section; it is the "User data deletion"
+  instructions URL in the Meta app's settings, so keep it at `/data-deletion/`.
 - `style.css` styles every page; `assets/site.js` is the movement: the studio logo building
   itself as the game's splash does, the game logo's wobble, the key art's depth, and sections
   bouncing in.
