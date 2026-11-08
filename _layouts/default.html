@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% if page.title %}{% assign full_title = page.title | append: " · " | append: site.title %}{% else %}{% assign full_title = site.title %}{% endif %}
   {% assign description = page.description | default: site.description %}
+  {% comment %} Each page's link preview picture is 1200x630 (tools/make_link_previews.py makes them). {% endcomment %}
   {% assign image = page.image | default: "/assets/link-preview.png" %}
+  {% assign image_alt = page.image_alt | default: "The Zarondo Games logo." %}
   <title>{{ full_title }}</title>
   <meta name="description" content="{{ description }}">
   <meta name="theme-color" content="#141B3A">
@@ -13,11 +15,16 @@
   <link rel="apple-touch-icon" href="/assets/icon-160.png">
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.title }}">
   <meta property="og:title" content="{{ page.og_title | default: full_title }}">
   <meta property="og:description" content="{{ description }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta property="og:image" content="{{ site.url }}{{ image }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ image_alt | escape }}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="{{ image_alt | escape }}">
   {% if page.preload %}<link rel="preload" as="image" href="{{ page.preload }}" fetchpriority="high">{% endif %}
   <!-- Set before anything is drawn, so the studio logo can wait hidden for its build (site.js). -->
   <script>document.documentElement.classList.add("js");</script>
