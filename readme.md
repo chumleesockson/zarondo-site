@@ -17,6 +17,12 @@ builds it with Jekyll, so every page shares one header and footer.
 - `assets/` holds the studio logo, icons, link preview picture and the Quicksand font (the
   TTF is the master; the WOFF2 the pages load is cut from it with fontTools' `pyftsubset`);
   `assets/puffoonery/` holds the game's logo and key art.
+- Every page has its own link preview, the picture and words shown when someone shares it:
+  `image`, `image_alt` and `description` in the page's front matter. The pictures are
+  1200×630. The home page's is `assets/puffoonery/link-preview.jpg`; the others are in
+  `assets/link-previews/`, made by `tools/make_link_previews.py` (run it again when the
+  photo, the art, the screenshots or a page's title changes). A page without its own uses
+  `assets/link-preview.png`, the studio logo.
 - `CNAME` tells GitHub Pages which domain to serve.
 
 **Page day:** put the Steam store link in `steam_url` in `_config.yml`. Every "Coming soon
